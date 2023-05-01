@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "name": "course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "short_description": {
+      "type": "text",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "promotion_price": {
+      "type": "decimal",
+      "default": 0
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "duration": {
+      "type": "string",
+      "required": true
+    },
+    "lesson": {
+      "type": "integer",
+      "required": true
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "date_course": {
+      "type": "date"
+    },
+    "category": {
+      "model": "category",
+      "via": "course"
+    },
+    "instructor": {
+      "via": "courses",
+      "model": "instructor"
+    },
+    "course_type": {
+      "model": "course-type",
+      "via": "courses"
+    },
+    "curriculum": {
+      "type": "component",
+      "repeatable": true,
+      "required": true,
+      "component": "course.curriculum"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_course_curriculums",
+  "info": {
+    "name": "curriculum",
+    "icon": "address-book",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "module": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "course.videos"
+    }
+  }
+}
