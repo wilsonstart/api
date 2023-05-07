@@ -101,32 +101,14 @@ module.exports = {
     }).format(total_in_cents / 100)
 
     // enviar um email da compra para o usuário com Email Designer
-    // await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
-    //   {
-    //     to: userInfo.email,
-    //     from: "no-reply@portalescolastart.com",
-    //   },
-    //   {
-    //     templateId: 1,
-    //   },
-    //   {
-    //     user: userInfo,
-    //     payment: {
-    //       total: valorTotal,
-    //       card_brand: entry.card_brand,
-    //       card_last4: entry.card_last4,
-    //     },
-    //     games,
-    //   }
-    // );
-
-    // enviar email usando o template default
-    await strapi.plugins.email.services.email.sendTemplatedEmail(
+    await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
       {
         to: userInfo.email,
         from: "no-reply@portalescolastart.com",
       },
-      orderTemplate,
+      {
+        templateId: 1,
+      },
       {
         user: userInfo,
         payment: {
@@ -137,6 +119,24 @@ module.exports = {
         games,
       }
     );
+
+    // enviar email usando o template default
+    // await strapi.plugins.email.services.email.sendTemplatedEmail(
+    //   {
+    //     to: userInfo.email,
+    //     from: "no-reply@portalescolastart.com",
+    //   },
+    //   orderTemplate,
+    //   {
+    //     user: userInfo,
+    //     payment: {
+    //       total: valorTotal,
+    //       card_brand: entry.card_brand,
+    //       card_last4: entry.card_last4,
+    //     },
+    //     games,
+    //   }
+    // );
 
     // retornando que foi salvo no banco
     return sanitizeEntity(entity, { model: strapi.models.order });
