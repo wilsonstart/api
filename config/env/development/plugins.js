@@ -10,8 +10,8 @@ module.exports = ({ env }) => ({
       },
     },
     settings: {
-      defaultFrom: "wongames@gmail.com",
-      defaultReplyTo: "contact@gmail.com",
+      defaultFrom: "contato@portalescolastart.com",
+      defaultReplyTo: "contato@portalescolastart.com",
     },
   },
 });

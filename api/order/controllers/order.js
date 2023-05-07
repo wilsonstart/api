@@ -95,19 +95,42 @@ module.exports = {
 
     const entity = await strapi.services.order.create(entry);
 
-    // enviar um email da compra para o usuário
-    await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
+    const valorTotal = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(total_in_cents / 100)
+
+    // enviar um email da compra para o usuário com Email Designer
+    // await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
+    //   {
+    //     to: userInfo.email,
+    //     from: "no-reply@portalescolastart.com",
+    //   },
+    //   {
+    //     templateId: 1,
+    //   },
+    //   {
+    //     user: userInfo,
+    //     payment: {
+    //       total: valorTotal,
+    //       card_brand: entry.card_brand,
+    //       card_last4: entry.card_last4,
+    //     },
+    //     games,
+    //   }
+    // );
+
+    // enviar email usando o template default
+    await strapi.plugins.email.services.email.sendTemplatedEmail(
       {
         to: userInfo.email,
-        from: "no-reply@wongames.com",
+        from: "no-reply@portalescolastart.com",
       },
-      {
-        templateId: 1,
-      },
+      orderTemplate,
       {
         user: userInfo,
         payment: {
-          total: `$ ${total_in_cents / 100}`,
+          total: valorTotal,
           card_brand: entry.card_brand,
           card_last4: entry.card_last4,
         },
