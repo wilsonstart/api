@@ -18,6 +18,9 @@
     },
     "games": {
       "collection": "game"
+    },
+    "courses": {
+      "collection": "course"
     }
   }
 }

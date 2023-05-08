@@ -11,17 +11,12 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "upcomingGames": {
+    "freeCourses": {
       "type": "component",
       "repeatable": false,
       "component": "page.section"
     },
-    "freeGames": {
-      "type": "component",
-      "repeatable": false,
-      "component": "page.section"
-    },
-    "popularGames": {
+    "popularCourses": {
       "type": "component",
       "repeatable": false,
       "component": "page.popular-games"

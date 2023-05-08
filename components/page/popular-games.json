@@ -1,8 +1,9 @@
 {
   "collectionName": "components_page_popular_games",
   "info": {
-    "name": "popularGames",
-    "icon": "star-of-life"
+    "name": "popularCourses",
+    "icon": "star-of-life",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -15,8 +16,8 @@
       "repeatable": false,
       "component": "page.highlight"
     },
-    "games": {
-      "collection": "game"
+    "courses": {
+      "collection": "course"
     }
   }
 }
