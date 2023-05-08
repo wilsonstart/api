@@ -9,23 +9,23 @@ module.exports = {
     const { cart } = ctx.request.body;
 
     // simplify cart data
-    const cartGamesIds = await strapi.config.functions.cart.cartGamesIds(cart);
+    const cartCoursesIds = await strapi.config.functions.cart.cartCoursesIds(cart);
 
-    // get all games
-    const games = await strapi.config.functions.cart.cartItems(cartGamesIds);
+    // get all courses
+    const courses = await strapi.config.functions.cart.cartItems(cartCoursesIds);
 
-    if (!games.length) {
+    if (!courses.length) {
       ctx.response.status = 404;
       return {
         error: "Nenhum curso vádlido encontrado!",
       };
     }
 
-    const total = await strapi.config.functions.cart.total(games);
+    const total = await strapi.config.functions.cart.total(courses);
 
     if (total === 0) {
       return {
-        freeGames: true,
+        freeCourses: true,
       };
     }
 
@@ -34,7 +34,7 @@ module.exports = {
         amount: total,
         currency: "brl",
         payment_method_types: ['card','boleto'],
-        metadata: { cart: JSON.stringify(cartGamesIds) },
+        metadata: { cart: JSON.stringify(cartCoursesIds) },
       });
 
       return paymentIntent;
@@ -63,13 +63,13 @@ module.exports = {
       .findOne({ id: userId });
 
     // simplify cart data
-    const cartGamesIds = await strapi.config.functions.cart.cartGamesIds(cart);
+    const cartCoursesIds = await strapi.config.functions.cart.cartCoursesIds(cart);
 
-    // pegar os jogos
-    const games = await strapi.config.functions.cart.cartItems(cartGamesIds);
+    // pegar os cursos
+    const courses = await strapi.config.functions.cart.cartItems(cartCoursesIds);
 
     // pegar o total (saber se é free ou não)
-    const total_in_cents = await strapi.config.functions.cart.total(games);
+    const total_in_cents = await strapi.config.functions.cart.total(courses);
 
     // precisa pegar do frontend os valores do paymentMethod
     // e recuperar por aqui
@@ -90,7 +90,7 @@ module.exports = {
       card_brand: paymentInfo?.card?.brand,
       card_last4: paymentInfo?.card?.last4,
       user: userInfo,
-      games,
+      courses,
     };
 
     const entity = await strapi.services.order.create(entry);
@@ -116,7 +116,7 @@ module.exports = {
           card_brand: entry.card_brand,
           card_last4: entry.card_last4,
         },
-        games,
+        courses,
       }
     );
 
@@ -134,7 +134,7 @@ module.exports = {
     //       card_brand: entry.card_brand,
     //       card_last4: entry.card_last4,
     //     },
-    //     games,
+    //     courses,
     //   }
     // );
 

@@ -1,37 +1,37 @@
-const cartGamesIds = async (cart) => {
-  return await cart.map((game) => ({
-    id: game.id,
+const cartCoursesIds = async (cart) => {
+  return await cart.map((course) => ({
+    id: course.id,
   }));
 };
 
 const cartItems = async (cart) => {
-  let games = [];
+  let courses = [];
 
   await Promise.all(
-    cart?.map(async (game) => {
-      const validatedGame = await strapi.services.game.findOne({
-        id: game.id,
+    cart?.map(async (course) => {
+      const validatedCourse = await strapi.services.course.findOne({
+        id: course.id,
       });
 
-      if (validatedGame) {
-        games.push(validatedGame);
+      if (validatedCourse) {
+        courses.push(validatedCourse);
       }
     })
   );
 
-  return games;
+  return courses;
 };
 
-const total = async (games) => {
-  const amount = await games.reduce((acc, game) => {
-    return acc + game.price;
+const total = async (courses) => {
+  const amount = await courses.reduce((acc, course) => {
+    return acc + course.price;
   }, 0);
 
   return Number((amount * 100).toFixed(0));
 };
 
 module.exports = {
-  cartGamesIds,
+  cartCoursesIds,
   cartItems,
   total,
 };

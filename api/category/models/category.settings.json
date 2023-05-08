@@ -19,10 +19,6 @@
       "targetField": "name",
       "required": true
     },
-    "games": {
-      "via": "categories",
-      "collection": "game"
-    },
     "course": {
       "via": "category",
       "model": "course"

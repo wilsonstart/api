@@ -15,9 +15,6 @@
       "plugin": "users-permissions",
       "model": "user"
     },
-    "games": {
-      "collection": "game"
-    },
     "payment_intent_id": {
       "type": "string"
     },
@@ -29,6 +26,9 @@
     },
     "total_in_cents": {
       "type": "biginteger"
+    },
+    "courses": {
+      "collection": "course"
     }
   }
 }
